@@ -1,13 +1,14 @@
 'use client'
 
-import Image from "next/image";
-import { useEffect } from "react";
+import style from '../styles/page.module.scss'
 
 export default function Home() {
-
     return (
-        <main>
+        <main className={style.container}>
+            <h1>ENO가 추천하는 노래</h1>
+            <section>
 
+            </section>
         </main>
     );
 }
