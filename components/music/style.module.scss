@@ -1,0 +1,42 @@
+.image {
+    border-radius: 13px;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+}
+
+.title {
+    margin: 0;
+    margin-top: 10px;
+
+    color: #000;
+}
+
+.artist {
+    margin: 0;
+    margin-top: 5px;
+    color: var(--color-gray-400);
+}
+
+.artistImage {
+    border-radius: 1000px;
+    object-fit: cover;
+
+    transition: all 0.2s ease-in-out;
+    
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+}
+
+.name {
+    margin: 0;
+    margin-top: 10px;
+
+    color: black;
+}

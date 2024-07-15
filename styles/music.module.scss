@@ -1,3 +1,12 @@
+@keyframes Spinning {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .header {
     height: 64px;
     width: 100%;
@@ -113,17 +122,44 @@
     background-color: #fff;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
     z-index: 99999;
 
+    img {
+        border-radius: 1000px;
+
+        animation: Spinning 12s infinite linear;
+    }
+
+    h2 {
+        font-size: 30px;
+
+        margin: 0px;
+
+        color: #000;
+    }
+
+    span {
+        font-size: 20px;
+
+        margin: 10px 0 30px 0;
+
+        color: var(--color-gray-400);
+    }
+
     button {
         margin: 20px;
 
         padding: 10px 20px;
+        margin-top: 40px;
         
         height: fit-content;
+
+        display: flex;
+        align-items: center;
 
         border: none;
         border-radius: 10px;
@@ -135,5 +171,13 @@
         font-size: 20px;
 
         cursor: pointer;
+
+        gap: 10px;
+
+        span {
+            color: white;
+
+            margin: 0;
+        }
     }
 }

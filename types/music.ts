@@ -3,7 +3,12 @@ export interface Music {
         kr: string,
         en: string,
     };
-    singer: string;
+    artist: string;
     filePath: string;
     coverPath: string;
+}
+
+export interface ArtistType {
+    name: string;
+    image: string;
 }
