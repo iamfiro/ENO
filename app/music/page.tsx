@@ -51,15 +51,14 @@ function MusicPlayer(): JSX.Element {
          * 현재 가사로 스크롤 이동
          */
         const scrollToCurrentLyrics = () => {
-        const currentLyricsIndex = lyric.findIndex((line) =>
-            currentTime >= line.time && currentTime < (lyric[lyric.indexOf(line) + 1]?.time || Infinity)
-        );
-        const currentLyrics = lyricsRef.current[currentLyricsIndex];
-        if (currentLyrics) {
-            currentLyrics.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    };
-
+            const currentLyricsIndex = lyric.findIndex((line) =>
+                currentTime >= line.time && currentTime < (lyric[lyric.indexOf(line) + 1]?.time || Infinity)
+            );
+            const currentLyrics = lyricsRef.current[currentLyricsIndex];
+            if (currentLyrics) {
+                currentLyrics.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        };
     }
 
     return (
