@@ -3,6 +3,8 @@
 import Search from '@/components/Search'
 import style from '../styles/page.module.scss'
 import Image from 'next/image'
+import { MusicList } from '@/constants/music';
+import MusicComponent from '@/components/music';
 
 export default function Home() {
     return (
@@ -10,10 +12,11 @@ export default function Home() {
             <Search />
             <h1>ENO가 추천하는 노래</h1>
             <section className={style.musicContainer}>
-                <article className={style.music}>
-                    <Image src={'/cover/warriors.jpeg'} width={200} height={200}  alt="kilometer" />
-                    <span>Warriors</span>
-                </article>
+                {
+                    MusicList.map((music, index) => (
+                        <MusicComponent key={index} name={music.name.kr} artist={music.artist} coverPath={music.coverPath} />
+                    ))
+                }
             </section>
         </main>
     );

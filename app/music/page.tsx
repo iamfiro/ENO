@@ -6,19 +6,9 @@ import Coin from '../../public/coin.png';
 import style from '../../styles/music.module.scss';
 import { MdMusicNote } from "react-icons/md";
 import { useEffect, useRef, useState } from 'react';
-import { BsFillPlayFill } from "react-icons/bs";
 import {useRouter, useSearchParams} from "next/navigation";
 import {lyrics} from "@/constants/lyrics";
 import { MusicList } from '@/constants/music';
-import ConfettiExplosion, { ConfettiProps } from 'react-confetti-explosion';
-
-const largeProps: ConfettiProps = {
-    force: 0.8,
-    duration: 3000,
-    particleCount: 300,
-    width: 1600,
-    colors: ['#041E43', '#1471BF', '#5BB4DC', '#FC027B', '#66D805'],
-  };
 
 /**
  * MusicPlayer 컴포넌트
@@ -32,22 +22,22 @@ function MusicPlayer(): JSX.Element {
     const router = useRouter();
     const searchParam = useSearchParams().get('n');
     const lyric = lyrics[searchParam || ''];
-    const [isExploding, setIsExploding] = useState(false);
     const musicData = MusicList.find(music => music.name.en === searchParam);
 
     if(!lyric) {
         router.push("/");
+        return <></>
     } else {
         useEffect(() => {
-        const audioElement = audioRef.current;
-        if (!audioElement) return;
+            const audioElement = audioRef.current;
+            if (!audioElement) return;
 
-        const updateCurrentTime = () => setCurrentTime(audioElement.currentTime);
-        audioElement.addEventListener('timeupdate', updateCurrentTime);
-        audioElement.addEventListener('ended', handleEnded)
+            const updateCurrentTime = () => setCurrentTime(audioElement.currentTime);
+            audioElement.addEventListener('timeupdate', updateCurrentTime);
+            audioElement.addEventListener('ended', handleEnded)
 
-        return () => audioElement.removeEventListener('timeupdate', updateCurrentTime);
-    }, []);
+            return () => audioElement.removeEventListener('timeupdate', updateCurrentTime);
+        }, []);
 
         useEffect(() => {
             scrollToCurrentLyrics();
@@ -77,58 +67,57 @@ function MusicPlayer(): JSX.Element {
         const handleEnded = () => {
             router.push('?m=mend');
         }
-    }
 
-    return (
-        <main>
-            <audio ref={audioRef} src={musicData?.filePath}></audio>
-            <header className={style.header}>
-                <h1 className={style.title}>ENO - ECO 노래방</h1>
-                <div className={style.nameContainer}>
-                    <MdMusicNote size={18} />
-                    <span>{musicData?.artist} · {musicData?.name.en}</span>
-                </div>
-                <div className={style.dataContainer}>
-                    <div>
-                        <Image className={style.image} src={Killometer} alt="kilometer" />
-                        <span>3.2km</span>
+        return (
+            <main>
+                <audio ref={audioRef} src={musicData?.filePath}></audio>
+                <header className={style.header}>
+                    <h1 className={style.title}>ENO - ECO 노래방</h1>
+                    <div className={style.nameContainer}>
+                        <MdMusicNote size={18} />
+                        <span>{musicData?.artist} · {musicData?.name.en}</span>
                     </div>
-                    <div>
-                        <Image className={style.image} src={Coin} alt="coin" />
-                        <span>3개</span>
+                    <div className={style.dataContainer}>
+                        <div>
+                            <Image className={style.image} src={Killometer} alt="kilometer" />
+                            <span>3.2km</span>
+                        </div>
+                        <div>
+                            <Image className={style.image} src={Coin} alt="coin" />
+                            <span>3개</span>
+                        </div>
                     </div>
-                </div>
-            </header>
-            <section className={style.lyricsContainer}>
-                <main>
-                    {lyric.map((line, index) => (
-                        <h1
-                            key={index}
-                            ref={(el: any) => (lyricsRef.current[index] = el)}
-                            className={style.lyrics}
-                            data-now={currentTime >= line.time}
-                        >
-                            {line.text}
-                        </h1>
-                    ))}
-                </main>
-            </section>
-            {!play && (
-                <div className={style.imsi}>
-                    <h2>{musicData?.name.kr}</h2>
-                    <span>{musicData?.artist}</span>
-                    <Image src={musicData?.coverPath || ''} alt="music cover" width={200} height={200} />
-                    <button onClick={() => {
-                        setPlay(true);
-                        audioRef.current?.play();
-                    }}>
-                        <BsFillPlayFill size={30} />
-                        <span>노래 시작하기</span>
-                    </button>
-                </div>
-            )}
-        </main>
-    );
+                </header>
+                <section className={style.lyricsContainer}>
+                    <main>
+                        {lyric.map((line, index) => (
+                            <h1
+                                key={index}
+                                ref={(el: any) => (lyricsRef.current[index] = el)}
+                                className={style.lyrics}
+                                data-now={currentTime >= line.time}
+                            >
+                                {line.text}
+                            </h1>
+                        ))}
+                    </main>
+                </section>
+                {!play && (
+                    <div className={style.imsi}>
+                        <h2>{musicData?.name.kr}</h2>
+                        <span>{musicData?.artist}</span>
+                        <Image src={musicData?.coverPath || ''} alt="music cover" width={200} height={200} />
+                        <button onClick={() => {
+                            setPlay(true);
+                            audioRef.current?.play();
+                        }}>
+                            <span>가사 표시하기</span>
+                        </button>
+                    </div>
+                )}
+            </main>
+        );
+    }
 }
 
 export default MusicPlayer;
