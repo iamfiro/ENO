@@ -7,8 +7,3 @@ export interface Music {
     filePath: string;
     coverPath: string;
 }
-
-export interface ArtistType {
-    name: string;
-    image: string;
-}
