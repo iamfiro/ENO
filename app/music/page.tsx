@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 import {useRouter, useSearchParams} from "next/navigation";
 import {lyrics} from "@/constants/lyrics";
 import { MusicList } from '@/constants/music';
+import { useKaraokeData } from '@/context/karaoke';
 
 /**
  * MusicPlayer 컴포넌트
@@ -23,6 +24,7 @@ function MusicPlayer(): JSX.Element {
     const searchParam = useSearchParams().get('n');
     const lyric = lyrics[searchParam || ''];
     const musicData = MusicList.find(music => music.name.en === searchParam);
+    const { km, coin } = useKaraokeData();
 
     if(!lyric) {
         router.push("/");
@@ -80,11 +82,11 @@ function MusicPlayer(): JSX.Element {
                     <div className={style.dataContainer}>
                         <div>
                             <Image className={style.image} src={Killometer} alt="kilometer" />
-                            <span>3.2km</span>
+                            <span>{km}km</span>
                         </div>
                         <div>
                             <Image className={style.image} src={Coin} alt="coin" />
-                            <span>3개</span>
+                            <span>{coin}개</span>
                         </div>
                     </div>
                 </header>
