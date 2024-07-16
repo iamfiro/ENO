@@ -9,7 +9,7 @@ const SocketContext = createContext<{ socket: Socket; connected: boolean; } | nu
 
 export const SocketProvider = ({ children }: { children : ReactNode }) => {
     const [connected, setConnected] = useState(false);
-    const { km, coin, increaseCoin } = useKaraokeData();
+    const { increaseCoin, decreaseCoin } = useKaraokeData();
 
     useEffect(() => {
         socket.on('connect', () => {
@@ -18,8 +18,13 @@ export const SocketProvider = ({ children }: { children : ReactNode }) => {
         });
 
         socket.on('coin-increase-client', (data) => {
-            console.log('asd 앙')
-            increaseCoin(data.value.value);
+            console.log(data)
+            increaseCoin();
+        });
+
+        socket.on('coin-decrease-client', (data) => {
+            console.log(data)
+            decreaseCoin();
         });
 
         socket.on('disconnect', () => {

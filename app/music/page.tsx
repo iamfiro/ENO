@@ -24,7 +24,7 @@ function MusicPlayer(): JSX.Element {
     const searchParam = useSearchParams().get('n');
     const lyric = lyrics[searchParam || ''];
     const musicData = MusicList.find(music => music.name.en === searchParam);
-    const { km, coin } = useKaraokeData();
+    const { coin } = useKaraokeData();
 
     if(!lyric) {
         router.push("/");
@@ -80,10 +80,6 @@ function MusicPlayer(): JSX.Element {
                         <span>{musicData?.artist} · {musicData?.name.en}</span>
                     </div>
                     <div className={style.dataContainer}>
-                        <div>
-                            <Image className={style.image} src={Killometer} alt="kilometer" />
-                            <span>{km}km</span>
-                        </div>
                         <div>
                             <Image className={style.image} src={Coin} alt="coin" />
                             <span>{coin}개</span>

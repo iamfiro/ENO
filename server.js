@@ -21,8 +21,8 @@ app.prepare().then(() => {
             socket.broadcast.emit('coin-increase-client', { value: data });
         });
 
-        socket.on('coin-decrease-client', (data) => {
-            socket.broadcast.emit('coin-decrease-arduino', { value: data });
+        socket.on('coin-decrease-arduino', (data) => {
+            socket.broadcast.emit('coin-decrease-client', { value: data });
         });
 
         socket.on('music-name-client', (data) => {
