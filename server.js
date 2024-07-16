@@ -11,9 +11,6 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
 
-const serealPort = new SerialPort({ path: '/dev/ttyUSB0', baudRate: 9600 });
-const parser = serealPort.pipe(new ReadlineParser({ delimiter: '\r\n' }));
-
 app.prepare().then(() => {
     const httpServer = createServer(handler);
     const io = new Server(httpServer);
@@ -21,10 +18,6 @@ app.prepare().then(() => {
     io.on('connection', (socket) => {
         console.log('New connection:', socket.id);
 
-        parser.on('data', (data) => {
-            console.log('Received data:', data);
-            socket.emit('serial-data', data);
-        });
 
         socket.on('coin-increase-arduino', (data) => {
             socket.broadcast.emit('coin-increase-client', { value: data });
