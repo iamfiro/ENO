@@ -1,6 +1,10 @@
 import Image from 'next/image';
 import style from './style.module.scss';
 import Link from 'next/link';
+import { useState } from 'react';
+import ModalNoCoin from '../Modal/noCoin';
+import { useKaraokeData } from '@/context/karaoke';
+import { useRouter } from 'next/navigation';
 
 interface MusicInterface {
     name: string;
@@ -9,28 +13,28 @@ interface MusicInterface {
 }
 
 function MusicComponent({ name, artist, coverPath }: MusicInterface) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const { coin } = useKaraokeData();
+    const router = useRouter();
+
+    const handleClick = () => {
+        if(coin === 0) {
+            setModalVisible(true);
+        } else {
+            router.push(`/music?n=${name}`);
+        }
+    }
+
     return (
         <>
-            <Link href={`/music?n=${name}`} style={{ textDecoration: 'none' }}>
+            <button onClick={() => handleClick()} style={{ textDecoration: 'none', border: 'none', backgroundColor: 'transparent' }}>
                 <Image className={style.image} src={coverPath} alt="music cover" width={200} height={200} />
                 <h3 className={style.title}>{name}</h3>
                 <span className={style.artist}>{artist}</span>
-            </Link>
+            </button>
+            <ModalNoCoin isVisible={modalVisible} setVisible={setModalVisible} />
         </>
     );
 }
-
-function ArtistComponent({ name, image }: { name: string, image: string }) {
-    return (
-        <>
-            <Link href={`/artist?n=${name}`} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column' }}>
-                <Image className={style.artistImage} src={image} alt="music cover" width={200} height={200} />
-                <h3 className={style.name}>{name}</h3>
-            </Link>
-        </>
-    )
-}
-
-MusicComponent.Artist = ArtistComponent;
 
 export default MusicComponent;

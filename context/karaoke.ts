@@ -5,7 +5,7 @@ interface KaraokeData {
     km: number;
     setKm: (km: number) => void;
     decreaseCoin: () => void;
-    increaseCoin: () => void;
+    increaseCoin: (coin: number) => void;
 }
 
 export const useKaraokeData = create<KaraokeData>((set) => ({
@@ -13,5 +13,5 @@ export const useKaraokeData = create<KaraokeData>((set) => ({
     km: 0,
     setKm: (km: number) => set({ km }),
     decreaseCoin: () => set((state) => ({ coin: state.coin - 1 })),
-    increaseCoin: () => set((state) => ({ coin: state.coin + 1 })),
+    increaseCoin: (coin) => set(() => ({ coin })),
 }));

@@ -1,6 +1,7 @@
 'use client'
 
 import MusicComponent from '@/components/music';
+import Remote from '@/components/Remote';
 import Search from '@/components/Search';
 import { MusicList } from '@/constants/music';
 import style from '@/styles/searchPage.module.scss';
@@ -36,6 +37,7 @@ function SearchPage() {
                 }
             </section>
         </main>
+        <Remote />
         </>
     );
 }

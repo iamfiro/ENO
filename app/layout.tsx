@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "../styles/globals.scss";
-import ModalRouter from "@/components/Modal/router";
 import { SocketProvider } from "@/context/socket";
 
 const NotoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
@@ -21,7 +20,6 @@ export default function RootLayout({
 			<body className={NotoSansKR.className}>
 				<SocketProvider>
 					{children}
-					<ModalRouter />
 				</SocketProvider>
 			</body>
 		</html>

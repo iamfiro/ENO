@@ -1,0 +1,77 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.1);
+
+    animation: showBackdropAnimation 0.3s ease;
+}
+
+.modal {
+    max-width: 500px;
+    width: 100%;
+
+    background-color: #fff;
+
+    border-radius: 7px;
+
+    margin: 0 15px;
+    padding: 20px 0;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    animation: showAnimation 0.3s ease;
+}
+
+.left {
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.description {
+    font-size: 16px;
+    margin-top: 15px;
+
+    color: #666;
+}
+
+
+@keyframes showAnimation {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes showBackdropAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

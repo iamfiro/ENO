@@ -5,6 +5,8 @@ import style from '../styles/page.module.scss'
 import Image from 'next/image'
 import { MusicList } from '@/constants/music';
 import MusicComponent from '@/components/music';
+import ModalNoCoin from '@/components/Modal/noCoin';
+import Remote from '@/components/Remote';
 
 export default function Home() {
     return (
@@ -18,6 +20,7 @@ export default function Home() {
                     ))
                 }
             </section>
+            <Remote />
         </main>
     );
 }
