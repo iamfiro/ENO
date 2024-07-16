@@ -107,6 +107,7 @@ function MusicPlayer(): JSX.Element {
                         <h2>{musicData?.name.kr}</h2>
                         <span>{musicData?.artist}</span>
                         <Image src={musicData?.coverPath || ''} alt="music cover" width={200} height={200} />
+                        <div className={style.hole}></div>
                         <button onClick={() => {
                             setPlay(true);
                             audioRef.current?.play();
