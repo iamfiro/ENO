@@ -1,8 +1,6 @@
 import { createServer } from "node:http";
 import next from "next";
 import { Server } from "socket.io";
-import { SerialPort } from 'serialport';
-import { ReadlineParser } from '@serialport/parser-readline';
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
