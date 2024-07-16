@@ -17,15 +17,15 @@ app.prepare().then(() => {
         console.log('New connection:', socket.id);
 
         socket.on('coin-increase-arduino', (data) => {
-            socket.emit('coin-increase-client', { value: data });
+            socket.broadcast.emit('coin-increase-client', { value: data });
         });
 
         socket.on('coin-decrease-client', (data) => {
-            socket.emit('coin-decrease-arduino', { value: data });
+            socket.broadcast.emit('coin-decrease-arduino', { value: data });
         });
 
         socket.on('music-name-client', (data) => {
-            socket.emit('music-name-arduino', { value: data });
+            socket.broadcast.emit('music-name-arduino', { value: data });
         });
     });
 
