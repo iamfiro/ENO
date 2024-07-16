@@ -10,21 +10,31 @@ const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
 
 app.prepare().then(() => {
-  const httpServer = createServer(handler);
+    const httpServer = createServer(handler);
+    const io = new Server(httpServer);
 
-  const io = new Server(httpServer);
+    io.on('connection', (socket) => {
+        console.log('New connection:', socket.id);
 
-  io.on("connection", (socket) => {
-    // ...
-      console.log('New connection:', socket.id);
-  });
+        socket.on('coin-increase-arduino', (data) => {
+            socket.emit('coin-increase-client', { value: data });
+        });
 
-  httpServer
-    .once("error", (err) => {
-      console.error(err);
-      process.exit(1);
-    })
-    .listen(port, () => {
-      console.log(`> Ready on ${hostname}:${port}`);
+        socket.on('coin-decrease-client', (data) => {
+            socket.emit('coin-decrease-arduino', { value: data });
+        });
+
+        socket.on('music-name-client', (data) => {
+            socket.emit('music-name-arduino', { value: data });
+        });
+    });
+
+    httpServer.once('error', (err) => {
+        console.error(err);
+        process.exit(1);
+    });
+
+    httpServer.listen(port, () => {
+        console.log(`> Ready on ${hostname}:${port}`);
     });
 });
