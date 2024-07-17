@@ -7,7 +7,7 @@ interface KaraokeData {
 }
 
 export const useKaraokeData = create<KaraokeData>((set) => ({
-    coin: 320,
+    coin: 0,
     decreaseCoin: () => set((state) => ({ coin: state.coin - 1 })),
     increaseCoin: () => set((state) => ({ coin: state.coin + 1  })),
 }));

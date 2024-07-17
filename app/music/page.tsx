@@ -67,7 +67,7 @@ function MusicPlayer(): JSX.Element {
         };
 
         const handleEnded = () => {
-            router.push('?m=mend');
+            alert(`당신의 점수는 ${Math.random() * (100-73+1) + 100}점입니다!!`);
         }
 
         return (

@@ -13,7 +13,7 @@ function ModalNoCoin({ isVisible, setVisible }: ModalNoCoinProps) {
             <div className={style.modal}>
                 <Image src={Coin} alt="coin" width={40} height={40} style={{ marginBottom: '10px' }} />
                 <h1 className={style.title}>노래방 코인이 없습니다</h1>
-                <span className={style.description}>ENO는 뭐시기뭐시기</span>
+                <span className={style.description}>옆에 있는 자전거를 돌려 코인을 채굴하세요!</span>
             </div>
         </div>
     );
